@@ -142,7 +142,7 @@ public class Member {
                 	break;
                 }
                 }
-                System.out.println("이름 : ");
+                System.out.println("이름 : ");                
                 member.setname(sc.nextLine());
                 System.out.println("전화번호 : ");
                 member.setphone_number(sc.nextLine());
@@ -172,7 +172,7 @@ public class Member {
             break; // 초기메뉴로 이동
         } // if-else end
         } // end while
-         Thread.sleep(1000);
+         
     }     // end main
     
 	//로그인
@@ -206,9 +206,10 @@ public class Member {
            if(cnt2==0) {
         	   System.out.println("비밀번호가 틀렸습니다. 다시 입력하세요.");
            }else {
-        	   
-//로그인완료화면        	   
-            	System.out.println("*************************");
+        	  
+//로그인완료화면        	
+        	   while (true) {   
+        	    System.out.println("*************************");
             	System.out.println("[로그인 되셨습니다]");
             	System.out.println("1.회원 정보 수정");
             	System.out.println("2.대여반납히스토리");
@@ -221,17 +222,20 @@ public class Member {
                     break;
          
                 case ("2"):
-                    history(); 
+                    //history(); 
                     break;
                                
                default :
+            	   System.out.println("잘못 입력하셨습니다. 다시 입력하세요.");
             	   break;
             	}
            }
             	 }
              }
         }
+        }
     }
+
 
 
 //회원정보 수정
@@ -243,11 +247,23 @@ public void update() throws InterruptedException {
         int cnt = 0;
         for (int i = 0; i < member_idList.size(); i++) {
             if (temp.equals(member_idList.get(i).getmember_id())) {
-                System.out.println("비밀번호 : ");
-                String temp2 = sc.nextLine();
+            	cnt++;
+            	
+            }
+            	if(cnt==0) {
+                	System.out.println("아이디가 존재하지 않습니다. 다시 입력하세요.");
+                 }else {
+            	while (true) {
+            		System.out.println("비밀번호 : ");
+            	    String temp2 = sc.nextLine();
                 int cnt2 = 0;
                 for (int i2 = 0; i2 < member_pwList.size(); i2++) {
                     if (temp2.equals(member_pwList.get(i2).getmember_pw())) {
+                    	cnt2++;
+                    	if(cnt2==0) {
+                        	System.out.println("비밀번호가 존재하지 않습니다. 다시 입력하세요.");
+                    	}else {
+                    		
                 System.out.println("이름 : ");
                 member_idList.get(i).setname(sc.nextLine());
                 System.out.println("전화번호 : ");
@@ -260,25 +276,18 @@ public void update() throws InterruptedException {
                 System.out.println("*****************");                
                 System.out.println("[수정이 완료되었습니다]");
                 System.out.println("*****************");
-                break;
+               
+                
+                login();//
+            
             }
-        } // end for
-        if (cnt == 0) {
-            System.out.println("해당 회원이 존재하지 않습니다. 다시 입력하세요.");
-        } else {
-            break;// 메인으로
+        } 
+        
+        }
+    }
             
         }
     }
-            Thread.sleep(1000);
-        }
-    }// end while
-}
-//대여반납히스토리
-public void history() {
-	while (true) {
-		
-	}
 }
 }
-           
+}
